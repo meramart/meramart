@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Mera Mart logo">
+  <rect width="64" height="64" rx="14" fill="#2874F0"/>
+  <path d="M14 22h36l-3 30a4 4 0 0 1-4 3.5H21a4 4 0 0 1-4-3.5z" fill="#FFE500"/>
+  <path d="M23 22v-3a9 9 0 0 1 18 0v3" fill="none" stroke="#FF9900" stroke-width="4" stroke-linecap="round"/>
+  <path d="M23 47V33l9 10 9-10v14" fill="none" stroke="#131921" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mera Mart – Smart Shopping, Best Deals</title>
+<meta name="description" content="Mera Mart: Amazon, Flipkart aur aur bhi trusted stores ke best products ek jagah. Kuch links affiliate hain; aapke liye price same rehta hai.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta name="theme-color" content="#131921">
+<style>
+:root{
+  --navy:#131921;--navy2:#232f3e;--orange:#ff9900;--yellow:#ffd814;--yellow2:#ffa41c;
+  --blue:#2874f0;--blue-d:#1a5bd1;--fyellow:#ffe500;
+  --bg:#eaeded;--card:#fff;--ink:#0f1111;--muted:#565959;--line:#d5d9d9;--red:#cc0c39;--green:#067d62;
+}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1319;--card:#1a222d;--ink:#f1f3f4;--muted:#a7b0b8;--line:#2f3b49}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+.wrap{max-width:1240px;margin:0 auto;padding:0 14px}
+a{color:inherit}
+
+/* ---------- Header ---------- */
+header{position:sticky;top:0;z-index:20}
+.top{background:var(--navy);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:14px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:0 0 auto;padding:2px 6px;border:1px solid transparent;border-radius:6px}
+.brand:hover{border-color:#fff}
+.brand svg{width:44px;height:44px;display:block}
+.brand .nm{font-size:25px;font-weight:800;letter-spacing:-.3px;line-height:1}
+.brand .nm b{color:var(--fyellow)}
+.brand .tg{display:block;font-size:10.5px;color:#c9d1d9;letter-spacing:.3px;margin-top:3px;font-weight:500}
+.search{flex:1 1 320px;display:flex;min-width:0;border-radius:8px;overflow:hidden;box-shadow:0 0 0 2px transparent}
+.search:focus-within{box-shadow:0 0 0 3px var(--orange)}
+.search input{flex:1;min-width:0;border:0;padding:12px 14px;font-size:16px;outline:0;background:#fff;color:#0f1111}
+.search button{border:0;background:var(--orange);color:var(--navy);width:52px;cursor:pointer;display:grid;place-items:center}
+.search button:hover{background:#e68a00}
+.search svg{width:22px;height:22px}
+.toplinks{display:flex;gap:6px;flex:0 0 auto}
+.toplinks a{color:#fff;text-decoration:none;font-size:14px;font-weight:600;padding:8px 10px;border-radius:6px;border:1px solid transparent}
+.toplinks a:hover{border-color:#fff}
+.toplinks a.hot{background:var(--blue)}
+.toplinks a.hot:hover{background:var(--blue-d);border-color:transparent}
+
+.nav{background:var(--blue);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.nav .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav .wrap::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:transparent;color:#fff;padding:11px 14px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;font-family:inherit}
+.tab:hover{background:rgba(255,255,255,.14)}
+.tab.on{border-bottom-color:var(--fyellow);background:rgba(0,0,0,.14)}
+.tab small{opacity:.75;font-weight:500;margin-left:4px;font-size:11px}
+
+/* ---------- Carousel ---------- */
+.hero{position:relative;margin-top:14px;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(19,25,33,.25);background:var(--navy)}
+.track{position:relative;height:clamp(210px,36vw,380px)}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 clamp(16px,6vw,72px);opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s;color:#fff;overflow:hidden}
+.slide.on{opacity:1;visibility:visible}
+.slide .txt{position:relative;z-index:2;max-width:560px}
+.slide .kick{display:inline-block;background:var(--fyellow);color:var(--navy);font-weight:800;font-size:12px;padding:3px 10px;border-radius:999px;letter-spacing:.4px;margin-bottom:10px}
+.slide h2{margin:0 0 8px;font-size:clamp(22px,4.6vw,46px);line-height:1.08;letter-spacing:-.5px}
+.slide p{margin:0 0 16px;font-size:clamp(13px,1.9vw,18px);opacity:.93}
+.cta{display:inline-block;background:linear-gradient(#ffe36b,var(--yellow2));color:var(--navy);font-weight:800;border:0;border-radius:999px;padding:11px 22px;font-size:15px;cursor:pointer;text-decoration:none;font-family:inherit;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.cta:hover{filter:brightness(1.05)}
+.art{position:relative;z-index:1;flex:0 0 auto;width:clamp(120px,32vw,380px);height:84%;display:grid;place-items:center}
+.art .ring{position:absolute;width:min(100%,86%);aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.16);border:2px dashed rgba(255,255,255,.35)}
+.art .em{position:relative;font-size:clamp(70px,16vw,200px);line-height:1;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));animation:float 4s ease-in-out infinite}
+.art img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 12px 16px rgba(0,0,0,.4));z-index:2}
+.slide::before{content:"";position:absolute;right:-8%;top:-30%;width:55%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.07)}
+@keyframes float{50%{transform:translateY(-10px) rotate(-3deg)}}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:42px;height:68px;border:0;background:rgba(19,25,33,.45);color:#fff;font-size:26px;cursor:pointer;border-radius:8px}
+.arrow:hover{background:rgba(19,25,33,.75)}
+.arrow.l{left:8px}.arrow.r{right:8px}
+.dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:7px;z-index:5}
+.dots button{width:9px;height:9px;border-radius:99px;border:0;padding:0;background:rgba(255,255,255,.5);cursor:pointer;transition:all .25s}
+.dots button.on{width:26px;background:var(--fyellow)}
+
+/* ---------- Trust strip ---------- */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0}
+.strip div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13.5px;display:flex;gap:10px;align-items:center}
+.strip span{font-size:22px}
+.strip b{display:block;font-size:14px}
+.strip small{color:var(--muted)}
+
+/* ---------- Products ---------- */
+.disc{background:#fff8e1;color:#5b4500;border:1px solid #f5d77a;border-radius:10px;padding:10px 14px;font-size:13.5px;margin:0 0 14px}
+@media(prefers-color-scheme:dark){.disc{background:#2b2410;color:#f3dd9a;border-color:#5b4a14}}
+.sec{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
+.sec h2{margin:0;font-size:22px;padding-left:10px;border-left:5px solid var(--orange)}
+.sec .status{font-size:12.5px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.14)}
+.pic{position:relative;height:150px;display:grid;place-items:center;background:linear-gradient(135deg,#f4f7ff,#fff4dd)}
+@media(prefers-color-scheme:dark){.pic{background:linear-gradient(135deg,#1f2b3d,#2b2616)}}
+.pic .em{font-size:64px}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6px}
+.badge{position:absolute;top:8px;left:8px;z-index:3;background:var(--red);color:#fff;font-size:11px;font-weight:800;border-radius:4px;padding:3px 8px}
+.chip{position:absolute;top:8px;right:8px;z-index:3;font-size:10.5px;font-weight:800;border-radius:4px;padding:3px 7px;color:#fff;background:#555}
+.chip.amazon{background:var(--navy);color:var(--orange)}
+.chip.flipkart{background:var(--blue);color:var(--fyellow)}
+.chip.myntra{background:#ff3f6c}
+.chip.meesho{background:#9f2089}
+.body{padding:12px;display:flex;flex-direction:column;gap:5px;flex:1}
+.body .cat{font-size:11.5px;color:var(--muted)}
+.body h3{margin:0;font-size:15px;line-height:1.3}
+.body p{margin:0;font-size:13px;color:var(--muted);flex:1}
+.price{font-weight:800;font-size:18px}
+.price s{color:var(--muted);font-weight:400;font-size:13px;margin-left:6px}
+.price b{color:var(--green);font-size:13px;margin-left:6px}
+.btn{display:block;text-align:center;padding:10px 12px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;margin-top:4px;border:1px solid transparent}
+.btn.amazon{background:linear-gradient(#ffe36b,var(--yellow2));color:var(--navy);border-color:#e3a21a}
+.btn.flipkart,.btn.other{background:var(--blue);color:#fff}
+.btn.flipkart:hover,.btn.other:hover{background:var(--blue-d)}
+.btn.amazon:hover{filter:brightness(1.04)}
+.btn.off{background:var(--line);color:var(--muted);pointer-events:none}
+.empty{color:var(--muted);padding:30px 0;text-align:center}
+
+footer{margin-top:36px;background:var(--navy);color:#c9d1d9;font-size:13px}
+footer .backtop{display:block;text-align:center;background:var(--navy2);color:#fff;padding:12px;text-decoration:none;font-weight:600}
+footer .backtop:hover{background:#37475a}
+footer .in{padding:24px 14px;text-align:center}
+footer .in .brand{display:inline-flex;margin-bottom:8px}
+footer a.l{color:var(--fyellow)}
+footer p{margin:6px auto;max-width:720px}
+@media(max-width:640px){
+  .toplinks{display:none}
+  .arrow{display:none}
+  .slide{padding-bottom:30px}
+  .track{height:250px}
+  .art{width:36vw}
+  .strip{grid-template-columns:1fr 1fr;gap:8px}
+  .strip div{padding:8px 10px;gap:8px}
+  .strip small{display:none}
+  .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .pic{height:120px}
+  .body h3{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.art .em{animation:none}.slide{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><div class="wrap">
+    <a class="brand" href="./" aria-label="Mera Mart home">
+      <!-- Mera Mart logo (original) -->
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#2874F0"/><path d="M14 22h36l-3 30a4 4 0 0 1-4 3.5H21a4 4 0 0 1-4-3.5z" fill="#FFE500"/><path d="M23 22v-3a9 9 0 0 1 18 0v3" fill="none" stroke="#FF9900" stroke-width="4" stroke-linecap="round"/><path d="M23 47V33l9 10 9-10v14" fill="none" stroke="#131921" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <span><span class="nm">Mera <b>Mart</b></span><span class="tg">SAB KUCH, EK JAGAH</span></span>
+    </a>
+    <form class="search" role="search" onsubmit="return false">
+      <input id="q" type="search" placeholder="Mera Mart me search karo…" aria-label="Search products" autocomplete="off">
+      <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+    </form>
+    <div class="toplinks"><a href="#shop" data-go="Today's Deals" class="hot">🔥 Today's Deals</a><a href="#shop" data-go="Mobiles & Laptops">📱 Mobiles</a></div>
+  </div></div>
+  <nav class="nav" aria-label="Categories"><div class="wrap" id="menu"></div></nav>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-roledescription="carousel" aria-label="Featured deals">
+    <div class="track" id="track"></div>
+    <button class="arrow l" id="prev" aria-label="Previous slide">‹</button>
+    <button class="arrow r" id="next" aria-label="Next slide">›</button>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <div class="strip">
+    <div><span>🛡️</span><p style="margin:0"><b>Trusted stores</b><small>Amazon, Flipkart & more</small></p></div>
+    <div><span>💰</span><p style="margin:0"><b>Price same</b><small>Aapko koi extra charge nahi</small></p></div>
+    <div><span>🔄</span><p style="margin:0"><b>Live updates</b><small>Naye deals regularly</small></p></div>
+    <div><span>🔗</span><p style="margin:0"><b>Direct checkout</b><small>Kharidari store ki site par</small></p></div>
+  </div>
+
+  <div class="disc" id="disc"></div>
+  <div class="sec" id="shop"><h2 id="title"></h2><span class="status" id="status"></span></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>Is category me abhi koi product nahi hai.</div>
+</main>
+
+<footer>
+  <a class="backtop" href="#top" onclick="window.scrollTo({top:0});return false">↑ Back to top</a>
+  <div class="in">
+    <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#2874F0"/><path d="M14 22h36l-3 30a4 4 0 0 1-4 3.5H21a4 4 0 0 1-4-3.5z" fill="#FFE500"/><path d="M23 22v-3a9 9 0 0 1 18 0v3" fill="none" stroke="#FF9900" stroke-width="4" stroke-linecap="round"/><path d="M23 47V33l9 10 9-10v14" fill="none" stroke="#131921" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="nm">Mera <b>Mart</b></span></div>
+    <p id="foot"></p>
+    <p id="flinks"></p>
+    <p>Amazon, Flipkart, Myntra, Meesho aur baki names unke respective owners ke trademarks hain. Mera Mart in companies ka official part nahi hai.</p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   1) SETTINGS – sirf yeh block edit karo
+   ===================================================================== */
+const SITE = {
+  name: "Mera Mart",
+  sheetCsvUrl: "",       // Google Sheet "Publish to web" CSV link (README dekho)
+  refreshMinutes: 5,
+  contactEmail: "",      // e.g. "hello@example.com" (khali = link hide)
+  privacyUrl: "",        // e.g. "privacy.html" (khali = link hide)
+  clickEndpoint: ""      // optional; privacy notice zaroori
+};
+
+/* Carousel – 10 slides. img: apni product image ka path/URL (e.g. "images/s1.jpg").
+   Khali chhodo to attractive illustration dikhega. Sirf wahi images lagao jinke rights aapke paas hain. */
+const SLIDES = [
+  {k:"MEGA SALE",   t:"Smartphones, Best Prices", s:"5G phones ka poora range compare karo",           cat:"Mobiles & Laptops", em:"📱", bg:["#232f3e","#2874f0"], img:""},
+  {k:"TRENDING",    t:"Laptops for Work & Study",  s:"Student se gaming tak, sab ek jagah",              cat:"Mobiles & Laptops", em:"💻", bg:["#131921","#1a5bd1"], img:""},
+  {k:"MUSIC",       t:"Earbuds & Headphones",      s:"Bass, battery aur ANC ke best options",            cat:"Electronics",       em:"🎧", bg:["#2874f0","#7a3df0"], img:""},
+  {k:"TODAY ONLY",  t:"Today's Hot Deals",         s:"Roz naye deals, miss mat karo",                    cat:"Today's Deals",     em:"🔥", bg:["#cc0c39","#ff7a00"], img:""},
+  {k:"HOME",        t:"Kitchen Upgrade",           s:"Air fryer, mixer aur bahut kuch",                  cat:"Home & Kitchen",    em:"🍳", bg:["#067d62","#0b4f6c"], img:""},
+  {k:"STYLE",       t:"Fashion Fest",              s:"Shoes, kurti, jeans – naya style",                 cat:"Fashion",           em:"👟", bg:["#9f2089","#ff3f6c"], img:""},
+  {k:"BEAUTY",      t:"Glow Up Time",              s:"Skincare aur cosmetics ke top picks",              cat:"Cosmetics",         em:"💄", bg:["#c2185b","#ff8a00"], img:""},
+  {k:"WORKSPACE",   t:"Computer Accessories",      s:"Keyboard, SSD, monitor – setup banao",             cat:"Computers",         em:"⌨️", bg:["#131921","#37475a"], img:""},
+  {k:"FITNESS",     t:"Sports & Fitness Gear",     s:"Fit raho, active raho",                            cat:"Sports & Fitness",  em:"🏋️", bg:["#0b6e4f","#2874f0"], img:""},
+  {k:"KIDS",        t:"Toys & Baby Store",         s:"Bacchon ke liye khushiyan",                        cat:"Toys & Baby",       em:"🧸", bg:["#ff9900","#e0457b"], img:""}
+];
+
+/* 10 menu categories (limit = max products) */
+const CATEGORIES = [
+  {n:"Today's Deals",    e:"🔥", limit:15},
+  {n:"Electronics",      e:"🔌", limit:15},
+  {n:"Mobiles & Laptops",e:"📱", limit:15},
+  {n:"Computers",        e:"🖥️", limit:15},
+  {n:"Home & Kitchen",   e:"🏠", limit:15},
+  {n:"Fashion",          e:"👗", limit:15},
+  {n:"Cosmetics",        e:"💄", limit:15},
+  {n:"Sports & Fitness", e:"🏋️", limit:15},
+  {n:"Books",            e:"📚", limit:15},
+  {n:"Toys & Baby",      e:"🧸", limit:15}
+];
+
+/* Merchants – sirf official affiliate formats */
+const MERCHANTS = {
+  amazon:   { name:"Amazon India", enabled:true, mode:"amazon-tag", tag:"YOURTAG-21", hosts:["www.amazon.in","amazon.in"] },
+  flipkart: { name:"Flipkart",     enabled:true, mode:"approved-link", template:"", hosts:["www.flipkart.com","dl.flipkart.com","fkrt.it"] },
+  myntra:   { name:"Myntra",       enabled:true, mode:"approved-link", template:"", hosts:["www.myntra.com","myntra.com"] },
+  meesho:   { name:"Meesho",       enabled:true, mode:"approved-link", template:"", hosts:["www.meesho.com","meesho.com"] }
+};
+
+/* Demo products (15 per category) – Sheet connect hone par replace ho jate hain */
+const DEMO = {
+ "Today's Deals":["🔥|Smartwatch Deals","🔥|Bluetooth Speaker Deals","🔥|Power Bank Deals","🔥|Mixer Grinder Deals","🔥|Sneaker Deals","🔥|Face Wash Deals","🔥|Laptop Bag Deals","🔥|LED Bulb Deals","🔥|Water Bottle Deals","🔥|Kids Toy Deals","🔥|Earbuds Deals","🔥|Trimmer Deals","🔥|Backpack Deals","🔥|Perfume Deals","🔥|Induction Cooktop Deals"],
+ "Electronics":["🎧|Wireless Earbuds","🎧|Over-ear Headphones","🔊|Soundbar","📺|Smart TV 43 inch","📷|Action Camera","🔌|Power Bank 20000mAh","⌚|Smartwatch","🎮|Gaming Controller","🔦|Rechargeable Torch","📡|WiFi Router","🔋|AA Rechargeable Batteries","🖲️|Webcam Full HD","📻|Bluetooth Speaker","💡|Smart Bulb","🔌|Extension Board Surge Protector"],
+ "Mobiles & Laptops":["📱|Smartphone under 15000","📱|Smartphone under 25000","📱|5G Smartphone","📱|Phone Case","💻|Laptop under 40000","💻|Gaming Laptop","💻|Student Laptop","💻|Laptop Cooling Pad","📱|Tempered Glass","📱|Fast Charger 65W","📱|Phone Stand","📱|Wireless Charger","💻|Laptop Sleeve","💻|Business Laptop","💻|Chromebook"],
+ "Computers":["⌨️|Mechanical Keyboard","🖱️|Wireless Mouse","🖥️|Monitor 24 inch","💾|External SSD 1TB","💽|Pen Drive 64GB","🖨️|Printer All-in-one","🪑|Office Chair","🎒|Laptop Backpack","🔌|USB-C Hub","🧠|RAM 16GB DDR4","🖥️|Desktop Computer","🎧|PC Headset With Mic","🌐|WiFi Adapter USB","📀|Internal SSD NVMe","🖱️|Mouse Pad Large"],
+ "Home & Kitchen":["🍳|Air Fryer","🥤|Mixer Grinder","🍲|Pressure Cooker","🧊|Water Bottle Steel","🍽️|Dinner Set","🧹|Vacuum Cleaner","🛏️|Bedsheet Double","☕|Electric Kettle","🍞|Sandwich Maker","🧺|Storage Containers","🔪|Kitchen Knife Set","🍚|Rice Cooker","🪟|Curtains","💡|LED Ceiling Light","🧼|Cleaning Mop Set"],
+ "Fashion":["👟|Men Running Shoes","👟|Women Sneakers","👕|Men T-Shirt","👗|Women Kurti","👖|Men Jeans","🕶️|Sunglasses","👜|Women Handbag","⌚|Men Watch","🧥|Winter Jacket","🩴|Sliders Flip Flops","👔|Formal Shirt","🥻|Saree","👚|Women Tops","🧢|Cap","🧦|Socks Pack"],
+ "Cosmetics":["🧴|Face Wash","🧴|Sunscreen SPF 50","💄|Matte Lipstick","👁️|Kajal Eyeliner","🧴|Moisturizer","🧴|Hair Serum","🧴|Shampoo","💅|Nail Polish","🪞|Compact Powder","🧴|Body Lotion","🧔|Beard Trimmer","🌸|Perfume","🧴|Hair Oil","💋|Lip Balm","🧴|Face Serum"],
+ "Sports & Fitness":["🏋️|Dumbbell Set","🧘|Yoga Mat","🏏|Cricket Bat","⚽|Football","🏸|Badminton Racket","🚴|Cycle Accessories","🥤|Protein Shaker","🪢|Skipping Rope","⌚|Fitness Band","🎽|Gym T-Shirt","🏃|Treadmill","🧤|Gym Gloves","🏊|Swimming Goggles","🥾|Trekking Shoes","💪|Resistance Bands"],
+ "Books":["📚|Self Help Books","📖|Bestselling Novels","📘|UPSC Books","📗|Class 10 Books","📙|Kids Story Books","📕|Hindi Books","📓|Notebook Diary","✏️|Gel Pens","📚|Finance Books","📖|Competitive Exam Books","📚|Motivational Books","📘|English Grammar Books","📗|Class 12 Books","📙|Comics Graphic Novels","📕|Cookbooks"],
+ "Toys & Baby":["🧸|Soft Toys","🚗|Remote Control Car","🧩|Puzzle Games","🧱|Building Blocks","🍼|Baby Feeding Bottle","👶|Baby Diapers","🎨|Kids Art Kit","🪁|Outdoor Toys","🛁|Baby Care","🎲|Board Games","🚲|Kids Cycle","🧸|Baby Toys 0-12 Months","🎒|Kids School Bag","🪀|Educational Toys","🛒|Baby Stroller"]
+};
+function demoProducts(){
+  const out=[]; let i=0;
+  for(const [cat,list] of Object.entries(DEMO)) for(const s of list){
+    const [emoji,title]=s.split("|");
+    out.push({id:"d"+(++i),cat,title,desc:"Top rated options dekho aur compare karo.",merchant:"amazon",
+      url:"https://www.amazon.in/s?k="+encodeURIComponent(title),emoji,image:"",price:"",old:"",deal:cat==="Today's Deals"});
+  }
+  return out;
+}
+
+/* =====================================================================
+   2) LINK SERVICE
+   ===================================================================== */
+function parseUrl(u){ try{ const x=new URL(u); return x.protocol==="https:"?x:null; }catch(e){ return null; } }
+function hostAllowed(x,m){ return m.hosts.includes(x.hostname.toLowerCase()); }
+function buildAffiliateUrl(p){
+  const m=MERCHANTS[p.merchant];
+  if(!m) return {ok:false,reason:"Unknown merchant"};
+  if(!m.enabled) return {ok:false,reason:"Merchant disabled"};
+  const orig=parseUrl(p.url);
+  if(!orig||!hostAllowed(orig,m)) return {ok:false,reason:"Invalid product URL"};
+  if(m.mode==="amazon-tag"){
+    if(!m.tag||/YOURTAG/i.test(m.tag)) return {ok:false,reason:"Not configured"};
+    orig.searchParams.set("tag",m.tag);
+    return {ok:true,url:orig.toString()};
+  }
+  if(m.mode==="approved-link"){
+    let out=p.aff||"";
+    if(!out&&m.template) out=m.template.replace("{encodedUrl}",encodeURIComponent(p.url)).replace("{url}",p.url);
+    if(!out) return {ok:false,reason:"Not configured"};
+    const x=parseUrl(out);
+    if(!x) return {ok:false,reason:"Invalid affiliate link"};
+    if(!hostAllowed(x,m)) return {ok:false,reason:"Host not in allowlist"};
+    return {ok:true,url:x.toString()};
+  }
+  return {ok:false,reason:"Unsupported mode"};
+}
+function track(p){
+  if(!SITE.clickEndpoint||!navigator.sendBeacon) return;
+  try{navigator.sendBeacon(SITE.clickEndpoint,JSON.stringify({t:Date.now(),merchant:p.merchant,product:p.id,page:location.pathname}));}catch(e){}
+}
+
+/* =====================================================================
+   3) GOOGLE SHEET LOADER
+   Columns: id, category, title, description, merchant, url, aff_link, emoji, image, price, old_price, deal
+   ===================================================================== */
+function parseCSV(t){
+  const rows=[];let r=[],f="",q=false;
+  for(let i=0;i<t.length;i++){
+    const c=t[i];
+    if(q){ if(c==='"'){ if(t[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
+    else if(c==='"') q=true;
+    else if(c===","){ r.push(f);f=""; }
+    else if(c==="\n"||c==="\r"){ if(c==="\r"&&t[i+1]==="\n") i++; r.push(f);f=""; if(r.some(x=>x.trim()))rows.push(r); r=[]; }
+    else f+=c;
+  }
+  r.push(f); if(r.some(x=>x.trim())) rows.push(r);
+  return rows;
+}
+async function loadSheet(){
+  const res=await fetch(SITE.sheetCsvUrl,{cache:"no-store"});
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  const rows=parseCSV(await res.text());
+  const head=rows.shift().map(h=>h.trim().toLowerCase());
+  const col=n=>head.indexOf(n);
+  return rows.map((r,i)=>{
+    const g=n=>(col(n)>=0?(r[col(n)]||""):"").trim();
+    return {id:g("id")||("s"+i),cat:g("category"),title:g("title"),desc:g("description"),
+      merchant:(g("merchant")||"amazon").toLowerCase(),url:g("url"),aff:g("aff_link"),
+      emoji:g("emoji")||"🛒",image:g("image"),price:g("price"),old:g("old_price"),deal:/^(yes|y|true|1)$/i.test(g("deal"))};
+  }).filter(p=>p.title&&p.url);
+}
+
+/* =====================================================================
+   4) UI
+   ===================================================================== */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeImg=u=>{ if(!u) return ""; if(/^images\/[\w\-./]+$/i.test(u)) return u; const x=parseUrl(u); return x?x.toString():""; };
+let ALL=demoProducts(), active=CATEGORIES[0].n, live=false;
+
+function forCategory(name){
+  const cat=CATEGORIES.find(c=>c.n===name);
+  const list=name==="Today's Deals"?ALL.filter(p=>p.deal||p.cat===name):ALL.filter(p=>p.cat===name);
+  return list.slice(0,cat.limit);
+}
+function pct(p){
+  const a=parseFloat(String(p.price).replace(/[^\d.]/g,"")),b=parseFloat(String(p.old).replace(/[^\d.]/g,""));
+  return a&&b&&b>a?Math.round((1-a/b)*100):0;
+}
+function renderMenu(){
+  $("menu").innerHTML=CATEGORIES.map(c=>
+    `<button class="tab ${c.n===active?"on":""}" data-c="${esc(c.n)}">${c.e} ${esc(c.n)}<small>${forCategory(c.n).length}</small></button>`).join("");
+}
+function render(){
+  const q=$("q").value.trim().toLowerCase();
+  const cat=CATEGORIES.find(c=>c.n===active);
+  let list=forCategory(active);
+  if(q){ list=ALL.filter(p=>(p.title+" "+p.desc+" "+p.cat).toLowerCase().includes(q)); $("title").textContent="Search results ("+list.length+")"; }
+  else $("title").textContent=cat.e+" "+cat.n;
+  $("empty").hidden=list.length>0;
+  $("grid").innerHTML=list.map(p=>{
+    const r=buildAffiliateUrl(p),m=MERCHANTS[p.merchant]||{name:p.merchant};
+    const cls=["amazon","flipkart"].includes(p.merchant)?p.merchant:"other";
+    const d=pct(p), img=safeImg(p.image);
+    const price=p.price?`<div class="price">${esc(p.price)}${p.old?`<s>${esc(p.old)}</s>`:""}${d?`<b>${d}% off</b>`:""}</div>`:"";
+    const btn=r.ok
+      ?`<a class="btn ${cls}" href="${esc(r.url)}" target="_blank" rel="sponsored nofollow noopener" data-id="${esc(p.id)}">${p.merchant==="amazon"?"Amazon par dekho":"View on "+esc(m.name)} →</a>`
+      :`<span class="btn off" title="${esc(r.reason)}">${r.reason==="Not configured"?"Link not configured":"Unavailable"}</span>`;
+    return `<article class="card">${p.deal?'<span class="badge">DEAL</span>':""}<span class="chip ${esc(p.merchant)}">${esc(m.name)}</span>
+      <div class="pic"><span class="em">${esc(p.emoji)}</span>${img?`<img src="${esc(img)}" alt="${esc(p.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}</div>
+      <div class="body"><span class="cat">${esc(p.cat)}</span><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p>${price}${btn}</div></article>`;
+  }).join("");
+  renderMenu();
+}
+function goCategory(name,scroll){
+  active=name; $("q").value=""; render();
+  if(scroll) $("shop").scrollIntoView({behavior:"smooth",block:"start"});
+}
+async function refresh(){
+  if(!SITE.sheetCsvUrl){ $("status").textContent="Demo products – live update ke liye sheetCsvUrl set karo"; return; }
+  try{ ALL=await loadSheet(); live=true; $("status").textContent="Updated: "+new Date().toLocaleTimeString(); }
+  catch(e){ $("status").textContent=live?"Update fail hua, purana data dikh raha hai":"Sheet load nahi hui, demo products dikh rahe hain"; }
+  render();
+}
+
+/* ---------- Carousel ---------- */
+let cur=0,timer=null;
+function buildCarousel(){
+  $("track").innerHTML=SLIDES.map((s,i)=>{
+    const img=safeImg(s.img);
+    return `<div class="slide ${i===0?"on":""}" style="background:linear-gradient(115deg,${s.bg[0]},${s.bg[1]})" role="group" aria-roledescription="slide" aria-label="${i+1} of ${SLIDES.length}">
+      <div class="txt"><span class="kick">${esc(s.k)}</span><h2>${esc(s.t)}</h2><p>${esc(s.s)}</p>
+      <button class="cta" data-cat="${esc(s.cat)}">Shop now →</button></div>
+      <div class="art"><span class="ring"></span><span class="em">${esc(s.em)}</span>${img?`<img src="${esc(img)}" alt="${esc(s.t)}" referrerpolicy="no-referrer" onerror="this.remove()">`:""}</div></div>`;
+  }).join("");
+  $("dots").innerHTML=SLIDES.map((_,i)=>`<button class="${i===0?"on":""}" data-i="${i}" aria-label="Go to slide ${i+1}"></button>`).join("");
+}
+function show(i){
+  cur=(i+SLIDES.length)%SLIDES.length;
+  document.querySelectorAll(".slide").forEach((s,k)=>s.classList.toggle("on",k===cur));
+  document.querySelectorAll("#dots button").forEach((b,k)=>b.classList.toggle("on",k===cur));
+}
+function play(){ stop(); if(matchMedia("(prefers-reduced-motion:reduce)").matches) return; timer=setInterval(()=>show(cur+1),4800); }
+function stop(){ if(timer){clearInterval(timer);timer=null;} }
+function initCarousel(){
+  buildCarousel();
+  $("prev").onclick=()=>{show(cur-1);play();};
+  $("next").onclick=()=>{show(cur+1);play();};
+  $("dots").onclick=e=>{const b=e.target.closest("button");if(b){show(+b.dataset.i);play();}};
+  $("track").onclick=e=>{const b=e.target.closest(".cta");if(b)goCategory(b.dataset.cat,true);};
+  const hero=document.querySelector(".hero");
+  hero.addEventListener("mouseenter",stop); hero.addEventListener("mouseleave",play);
+  let sx=null;
+  hero.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;stop();},{passive:true});
+  hero.addEventListener("touchend",e=>{ if(sx!==null){const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) show(cur+(dx<0?1:-1));} sx=null; play(); });
+  document.addEventListener("visibilitychange",()=>document.hidden?stop():play());
+  play();
+}
+
+function init(){
+  document.title=SITE.name+" – Smart Shopping, Best Deals";
+  $("disc").innerHTML="<strong>Disclosure:</strong> Is site ke kuch links affiliate links hain. In se kharidne par "+esc(SITE.name)+" ko aapke extra paise diye bina chhota commission mil sakta hai. Price aur availability store tay karta hai.";
+  $("foot").textContent="© "+new Date().getFullYear()+" "+SITE.name+". Sabhi deals aur prices store ke hisab se badal sakte hain.";
+  const fl=[]; if(SITE.privacyUrl) fl.push(`<a class="l" href="${esc(SITE.privacyUrl)}">Privacy</a>`);
+  if(SITE.contactEmail) fl.push(`<a class="l" href="mailto:${esc(SITE.contactEmail)}">Contact</a>`);
+  $("flinks").innerHTML=fl.join(" · ");
+  $("menu").onclick=e=>{const b=e.target.closest(".tab");if(b)goCategory(b.dataset.c,false);};
+  document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();goCategory(a.dataset.go,true);}));
+  $("q").oninput=render;
+  $("grid").addEventListener("click",e=>{const a=e.target.closest("a[data-id]");if(!a)return;const p=ALL.find(x=>x.id===a.dataset.id);if(p)track(p);});
+  initCarousel(); render(); refresh();
+  if(SITE.sheetCsvUrl) setInterval(refresh,Math.max(1,SITE.refreshMinutes)*60000);
+}
+init();
+</script>
+</body>
+</html>
