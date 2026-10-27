@@ -1,4 +1,4 @@
-# Mera Mart – Affiliate Shopping Site
+# Mera Mart – Affiliate Shopping Site..
 
 Static website (no server needed). Files:
 - `index.html` – poori site (design + settings)
