@@ -42,7 +42,18 @@ header{position:sticky;top:0;z-index:20}
 .toplinks a.hot{background:var(--blue)}
 .toplinks a.hot:hover{background:var(--blue-d);border-color:transparent}
 
+.stores{background:var(--navy2);border-top:1px solid #37475a;color:#fff}
+.stores .wrap{display:flex;align-items:center;gap:8px;overflow-x:auto;padding-top:8px;padding-bottom:8px;scrollbar-width:none}
+.stores .wrap::-webkit-scrollbar{display:none}
+.stores .lbl{flex:0 0 auto;font-size:12px;color:#c9d1d9;font-weight:600;letter-spacing:.3px}
+.store{flex:0 0 auto;border:2px solid #4b5b6d;background:transparent;color:#fff;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.store i{width:10px;height:10px;border-radius:50%;background:var(--sc)}
+.store small{font-weight:500;opacity:.75;font-size:11px}
+.store:hover{border-color:var(--sc)}
+.store.on{background:var(--sc);border-color:var(--sc);color:var(--sct,#fff)}
+.store.on i{background:var(--sct,#fff)}
 .nav{background:var(--blue);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.tab.zero{opacity:.55}
 .nav .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 .nav .wrap::-webkit-scrollbar{display:none}
 .tab{flex:0 0 auto;border:0;background:transparent;color:#fff;padding:11px 14px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;font-family:inherit}
@@ -152,6 +163,7 @@ footer p{margin:6px auto;max-width:720px}
     </form>
     <div class="toplinks"><a href="#shop" data-go="Today's Deals" class="hot">🔥 Today's Deals</a><a href="#shop" data-go="Mobiles & Laptops">📱 Mobiles</a></div>
   </div></div>
+  <div class="stores"><div class="wrap" id="stores" role="tablist" aria-label="Shopping store"></div></div>
   <nav class="nav" aria-label="Categories"><div class="wrap" id="menu"></div></nav>
 </header>
 
@@ -170,7 +182,6 @@ footer p{margin:6px auto;max-width:720px}
     <div><span>🔗</span><p style="margin:0"><b>Direct checkout</b><small>Kharidari store ki site par</small></p></div>
   </div>
 
-  <div class="disc" id="disc"></div>
   <div class="sec" id="shop"><h2 id="title"></h2><span class="status" id="status"></span></div>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" hidden>Is category me abhi koi product nahi hai.</div>
@@ -182,6 +193,8 @@ footer p{margin:6px auto;max-width:720px}
     <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#2874F0"/><path d="M14 22h36l-3 30a4 4 0 0 1-4 3.5H21a4 4 0 0 1-4-3.5z" fill="#FFE500"/><path d="M23 22v-3a9 9 0 0 1 18 0v3" fill="none" stroke="#FF9900" stroke-width="4" stroke-linecap="round"/><path d="M23 47V33l9 10 9-10v14" fill="none" stroke="#131921" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="nm">Mera <b>Mart</b></span></div>
     <p id="foot"></p>
     <p id="flinks"></p>
+    <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong></p>
+    <p>Is site ke kuch links affiliate links hain. In se kharidne par Mera Mart ko aapke extra paise diye bina chhota commission mil sakta hai. Price aur availability store tay karta hai.</p>
     <p>Amazon, Flipkart, Myntra, Meesho aur baki names unke respective owners ke trademarks hain. Mera Mart in companies ka official part nahi hai.</p>
   </div>
 </footer>
@@ -230,10 +243,39 @@ const CATEGORIES = [
 
 /* Merchants – sirf official affiliate formats */
 const MERCHANTS = {
-  amazon:   { name:"Amazon India", enabled:true, mode:"amazon-tag", tag:"chairvi25-21", hosts:["www.amazon.in","amazon.in"] },
-  flipkart: { name:"Flipkart",     enabled:true, mode:"approved-link", template:"", hosts:["www.flipkart.com","dl.flipkart.com","fkrt.it"] },
-  myntra:   { name:"Myntra",       enabled:true, mode:"approved-link", template:"", hosts:["www.myntra.com","myntra.com"] },
-  meesho:   { name:"Meesho",       enabled:true, mode:"approved-link", template:"", hosts:["www.meesho.com","meesho.com"] }
+  amazon:   { name:"Amazon India", color:"#ff9900", text:"#131921", enabled:true, mode:"amazon-tag", tag:"chairvi25-21", hosts:["www.amazon.in","amazon.in"] },
+  flipkart: { name:"Flipkart",     color:"#2874f0", text:"#ffe500", enabled:true, mode:"approved-link", template:"", hosts:["www.flipkart.com","dl.flipkart.com","fkrt.it"] },
+  myntra:   { name:"Myntra",       color:"#ff3f6c", text:"#ffffff", enabled:true, mode:"approved-link", template:"", hosts:["www.myntra.com","myntra.com"] },
+  meesho:   { name:"Meesho",       color:"#9f2089", text:"#ffffff", enabled:true, mode:"approved-link", template:"", hosts:["www.meesho.com","meesho.com"] },
+  tatacliq: { name:"Tata CLiQ",    color:"#c2185b", text:"#ffffff", enabled:true, mode:"approved-link", template:"", hosts:["www.tatacliq.com","tatacliq.com"] },
+  ajio:     { name:"AJIO",         color:"#5b7083", text:"#ffffff", enabled:true, mode:"approved-link", template:"", hosts:["www.ajio.com","ajio.com"] },
+  nykaa:    { name:"Nykaa",        color:"#e80071", text:"#ffffff", enabled:true, mode:"approved-link", template:"", hosts:["www.nykaa.com","nykaa.com"] },
+  snapdeal: { name:"Snapdeal",     color:"#e40046", text:"#ffffff", enabled:true, mode:"approved-link", template:"", hosts:["www.snapdeal.com","snapdeal.com"] }
+};
+/* Header ke store buttons ka order (MERCHANTS ke keys) */
+const STORES = ["amazon","flipkart","myntra","meesho","tatacliq","ajio","nykaa","snapdeal"];
+
+/* Demo: kis store me kaun si categories ke demo products dikhein.
+   Sheet connect hone par ye sab hat jate hain aur sirf aapke rows dikhte hain. */
+const DEMO_CATS = {
+  amazon:   null,   // sab categories
+  flipkart: null,
+  myntra:   ["Today's Deals","Fashion","Cosmetics","Sports & Fitness"],
+  meesho:   ["Today's Deals","Fashion","Home & Kitchen","Cosmetics","Toys & Baby"],
+  tatacliq: ["Today's Deals","Electronics","Mobiles & Laptops","Fashion","Cosmetics","Home & Kitchen"],
+  ajio:     ["Today's Deals","Fashion","Sports & Fitness"],
+  nykaa:    ["Today's Deals","Cosmetics","Fashion"],
+  snapdeal: ["Today's Deals","Electronics","Home & Kitchen","Fashion","Toys & Baby","Books"]
+};
+const SEARCH_URL = {
+  amazon:   t=>"https://www.amazon.in/s?k="+encodeURIComponent(t),
+  flipkart: t=>"https://www.flipkart.com/search?q="+encodeURIComponent(t),
+  myntra:   t=>"https://www.myntra.com/"+encodeURIComponent(t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")),
+  meesho:   t=>"https://www.meesho.com/search?q="+encodeURIComponent(t),
+  tatacliq: t=>"https://www.tatacliq.com/search/?searchCategory=all&text="+encodeURIComponent(t),
+  ajio:     t=>"https://www.ajio.com/search/?text="+encodeURIComponent(t),
+  nykaa:    t=>"https://www.nykaa.com/search/result/?q="+encodeURIComponent(t),
+  snapdeal: t=>"https://www.snapdeal.com/search?keyword="+encodeURIComponent(t)
 };
 
 /* Demo products (15 per category) – Sheet connect hone par replace ho jate hain */
@@ -251,10 +293,16 @@ const DEMO = {
 };
 function demoProducts(){
   const out=[]; let i=0;
-  for(const [cat,list] of Object.entries(DEMO)) for(const s of list){
-    const [emoji,title]=s.split("|");
-    out.push({id:"d"+(++i),cat,title,desc:"Top rated options dekho aur compare karo.",merchant:"amazon",
-      url:"https://www.amazon.in/s?k="+encodeURIComponent(title),emoji,image:"",price:"",old:"",deal:cat==="Today's Deals"});
+  for(const st of STORES){
+    const only=DEMO_CATS[st];
+    for(const [cat,list] of Object.entries(DEMO)){
+      if(only&&!only.includes(cat)) continue;
+      for(const s of list){
+        const [emoji,title]=s.split("|");
+        out.push({id:"d"+(++i),cat,title,desc:"Top rated options dekho aur compare karo.",merchant:st,
+          url:SEARCH_URL[st](title),emoji,image:"",price:"",old:"",deal:cat==="Today's Deals"});
+      }
+    }
   }
   return out;
 }
@@ -328,12 +376,28 @@ async function loadSheet(){
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeImg=u=>{ if(!u) return ""; if(/^images\/[\w\-./]+$/i.test(u)) return u; const x=parseUrl(u); return x?x.toString():""; };
-let ALL=demoProducts(), active=CATEGORIES[0].n, live=false;
+let ALL=demoProducts(), active=CATEGORIES[0].n, live=false, store=STORES[0];
 
+/* Sirf selected store ke products */
+const inStore=()=>ALL.filter(p=>p.merchant===store);
 function forCategory(name){
   const cat=CATEGORIES.find(c=>c.n===name);
-  const list=name==="Today's Deals"?ALL.filter(p=>p.deal||p.cat===name):ALL.filter(p=>p.cat===name);
+  const pool=inStore();
+  const list=name==="Today's Deals"?pool.filter(p=>p.deal||p.cat===name):pool.filter(p=>p.cat===name);
   return list.slice(0,cat.limit);
+}
+function renderStores(){
+  $("stores").innerHTML='<span class="lbl">STORE CHUNO:</span>'+STORES.map(s=>{
+    const m=MERCHANTS[s];
+    return `<button class="store ${s===store?"on":""}" role="tab" aria-selected="${s===store}" data-s="${esc(s)}" style="--sc:${m.color};--sct:${m.text}"><i></i>${esc(m.name)}<small>${ALL.filter(p=>p.merchant===s).length}</small></button>`;
+  }).join("");
+}
+function setStore(s,scroll){
+  if(!MERCHANTS[s]) return;
+  store=s; $("q").value="";
+  try{ const u=new URL(location.href); u.searchParams.set("store",s); history.replaceState(null,"",u); }catch(e){}
+  renderStores(); render();
+  if(scroll) $("shop").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function pct(p){
   const a=parseFloat(String(p.price).replace(/[^\d.]/g,"")),b=parseFloat(String(p.old).replace(/[^\d.]/g,""));
@@ -341,14 +405,16 @@ function pct(p){
 }
 function renderMenu(){
   $("menu").innerHTML=CATEGORIES.map(c=>
-    `<button class="tab ${c.n===active?"on":""}" data-c="${esc(c.n)}">${c.e} ${esc(c.n)}<small>${forCategory(c.n).length}</small></button>`).join("");
+    {const n=forCategory(c.n).length; return `<button class="tab ${c.n===active?"on":""} ${n?"":"zero"}" data-c="${esc(c.n)}">${c.e} ${esc(c.n)}<small>${n}</small></button>`;}).join("");
 }
 function render(){
   const q=$("q").value.trim().toLowerCase();
   const cat=CATEGORIES.find(c=>c.n===active);
   let list=forCategory(active);
-  if(q){ list=ALL.filter(p=>(p.title+" "+p.desc+" "+p.cat).toLowerCase().includes(q)); $("title").textContent="Search results ("+list.length+")"; }
-  else $("title").textContent=cat.e+" "+cat.n;
+  const sn=MERCHANTS[store].name;
+  if(q){ list=inStore().filter(p=>(p.title+" "+p.desc+" "+p.cat).toLowerCase().includes(q)); $("title").textContent="Search results – "+sn+" ("+list.length+")"; }
+  else $("title").textContent=cat.e+" "+cat.n+" · "+sn;
+  $("empty").textContent=sn+" me is category me abhi koi product nahi hai.";
   $("empty").hidden=list.length>0;
   $("grid").innerHTML=list.map(p=>{
     const r=buildAffiliateUrl(p),m=MERCHANTS[p.merchant]||{name:p.merchant};
@@ -358,7 +424,7 @@ function render(){
     const btn=r.ok
       ?`<a class="btn ${cls}" href="${esc(r.url)}" target="_blank" rel="sponsored nofollow noopener" data-id="${esc(p.id)}">${p.merchant==="amazon"?"Amazon par dekho":"View on "+esc(m.name)} →</a>`
       :`<span class="btn off" title="${esc(r.reason)}">${r.reason==="Not configured"?"Link not configured":"Unavailable"}</span>`;
-    return `<article class="card">${p.deal?'<span class="badge">DEAL</span>':""}<span class="chip ${esc(p.merchant)}">${esc(m.name)}</span>
+    return `<article class="card">${p.deal?'<span class="badge">DEAL</span>':""}<span class="chip ${esc(p.merchant)}"${m.color&&!["amazon","flipkart"].includes(p.merchant)?` style="background:${m.color};color:${m.text}"`:""}>${esc(m.name)}</span>
       <div class="pic"><span class="em">${esc(p.emoji)}</span>${img?`<img src="${esc(img)}" alt="${esc(p.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}</div>
       <div class="body"><span class="cat">${esc(p.cat)}</span><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p>${price}${btn}</div></article>`;
   }).join("");
@@ -370,9 +436,10 @@ function goCategory(name,scroll){
 }
 async function refresh(){
   if(!SITE.sheetCsvUrl){ $("status").textContent="Demo products – live update ke liye sheetCsvUrl set karo"; return; }
+  /* Sheet connect hai: demo hat jayega, sirf Sheet ke rows dikhenge */
   try{ ALL=await loadSheet(); live=true; $("status").textContent="Updated: "+new Date().toLocaleTimeString(); }
   catch(e){ $("status").textContent=live?"Update fail hua, purana data dikh raha hai":"Sheet load nahi hui, demo products dikh rahe hain"; }
-  render();
+  renderStores(); render();
 }
 
 /* ---------- Carousel ---------- */
@@ -411,7 +478,8 @@ function initCarousel(){
 
 function init(){
   document.title=SITE.name+" – Smart Shopping, Best Deals";
-  $("disc").innerHTML="<strong>Disclosure:</strong> Is site ke kuch links affiliate links hain. In se kharidne par "+esc(SITE.name)+" ko aapke extra paise diye bina chhota commission mil sakta hai. Price aur availability store tay karta hai.";
+  try{ const s=new URLSearchParams(location.search).get("store"); if(s&&STORES.includes(s)) store=s; }catch(e){}
+  $("stores").onclick=e=>{const b=e.target.closest(".store");if(b)setStore(b.dataset.s,false);};
   $("foot").textContent="© "+new Date().getFullYear()+" "+SITE.name+". Sabhi deals aur prices store ke hisab se badal sakte hain.";
   const fl=[]; if(SITE.privacyUrl) fl.push(`<a class="l" href="${esc(SITE.privacyUrl)}">Privacy</a>`);
   if(SITE.contactEmail) fl.push(`<a class="l" href="mailto:${esc(SITE.contactEmail)}">Contact</a>`);
@@ -420,7 +488,7 @@ function init(){
   document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();goCategory(a.dataset.go,true);}));
   $("q").oninput=render;
   $("grid").addEventListener("click",e=>{const a=e.target.closest("a[data-id]");if(!a)return;const p=ALL.find(x=>x.id===a.dataset.id);if(p)track(p);});
-  initCarousel(); render(); refresh();
+  initCarousel(); renderStores(); render(); refresh();
   if(SITE.sheetCsvUrl) setInterval(refresh,Math.max(1,SITE.refreshMinutes)*60000);
 }
 init();
